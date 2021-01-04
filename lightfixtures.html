@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Hydrotek Hydroponics Calculators
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- CSS Files -->
+  <link href="./assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  <style>
+    .top-scroller {
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      font-size: 1em;
+      display: none;
+      z-index: 2;
+      text-align: center;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.35);
+      color: #fff;
+      line-height: 40px;
+
+    }
+    .top-scroller:hover {
+      background: rgba(0,0,0,.6);
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+    <div class="logo text-center">
+      <a style="font-size: 11pt;" class="simple-text logo-normal">
+        Changer la Langue
+      </a>
+      <a href="fr/lightfixtures.html"><img src="./assets/img/icons8-france-48.png"></a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item active  ">
+          <a class="nav-link text-center" href="./index.html">
+            <p>All Calculators</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./reservoir.html">
+            <img src="assets/img/icons8-water-tower-30.png"><span> Reservoir Volume</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2operating.html">
+            <img src="assets/img/icons8-time-30.png"><span> CO2 Operating Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2generator.html">
+            <img src="assets/img/icons8-co2-gauge-30.png"><span> CO2 Generator Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2injector.html">
+            <img src="assets/img/icons8-scuba-pressure-gauge-30.png"><span> CO2 Injector Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./dehumidifier.html">
+            <img src="assets/img/icons8-dew-point-30.png"><span> Dehumidifier Sizing</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./aircfm.html">
+            <img src="assets/img/icons8-air-quality-30.png"><span> Air Exchange CFM</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./cultureroom.html">
+            <img src="assets/img/icons8-room-30.png"><span> Culture Room Area</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./lightfixtures.html">
+            <img src="assets/img/icons8-idea-30.png"><span> Light Fixtures Coverage</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./watt2btu.html">
+            <img src="assets/img/icons8-lightning-bolt-30.png"><span> Watt to BTU/hr Converter</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./circuitload.html">
+            <img src="assets/img/icons8-integrated-circuit-30.png"><span> Circuit Load Capacity</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./electricitycost.html">
+            <img src="assets/img/icons8-estimate-30.png"><span> Electricity Cost</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./soil.html">
+            <img src="assets/img/icons8-sprout-30.png"><span> Soil Calculator</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./support.html">
+            <img src="assets/img/contact.png"><span> Support / Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center">
+    <img class="img-fluid" style="max-width: 80%; margin-top: 20px;" src="assets/img/hydro-logo.png">
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+
+        <div class="navbar-wrapper">
+          <!--            <a class="navbar-brand" href="#pablo">HH Calculators</a>-->
+
+          <!--            <div class="row text-center">-->
+          <!--              <img class="img-container" src="assets/img/hydro-logo.png">-->
+          <!--            </div>-->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div id="arrowDiv" data-toggle="collapse" href="#collapseInfo" role="button" aria-expanded="false" aria-controls="collapseInfo" class="card-header card-header-warning" onclick="changeArrow()">
+                <div class="ct-chart"></div>
+                <span><strong>Fixtures Coverage Calculator</strong><img id="arrowImg" class="float-right" src="assets/img/arrow-199-24.ico"></span>
+              </div>
+              <div class="card-footer">
+                <div class="collapse" id="collapseInfo">
+                  <p>Easily evaluate the number of grow lamps you will need to cover your whole crop with this light coverage calculator. Simply enter the required dimensions below and instantly view both the minimum and the optimal number of grow lights to cover your complete indoor hydroponic garden.</p>
+                  <p>For professional growers with many lights or multiple grow rooms, we invite you to contact one of our lighting experts. We will happily provide custom light mapping and other services to ensure your plants growing environment will be optimized.</p>
+                  <p style="font-weight: bold">* Enter size in inches, feet or meter.</p>
+                  <p style="font-weight: bold">** All grow lamps are assumed to be mounted horizontally.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form lpformnum="1" class="calcfrm">
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label for="roomLightUnit"><strong>Measurement unit:</strong></label>
+                <select style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="roomLightUnit" onchange="unitChangerCalc()">
+                  <!-- getNumLights() -->
+                  <option value="in">Inches</option>
+                  <option value="ft">Feet</option>
+                  <option value="m">Meters</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label for="roomWidthLights"><strong>Tray/Bench Width:</strong></label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" onchange="getNumLights()" id="roomWidthLights" type="number" max="10000" min="1" value="36">
+                <div class="input-group-append">
+                  <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="input-group-text m2p2">in</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label for="roomLengthLights"><strong>Tray/Bench Length:</strong></label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" onchange="getNumLights()" id="roomLengthLights" type="number" max="10000" min="1" value="36">
+                <div class="input-group-append">
+                  <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="input-group-text m2p2">in</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label for="NumberTrays"><strong>Number of Trays/Benches:</strong></label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" onchange="getNumLights()" id="NumberTrays" type="number" max="10000" min="1" value="1">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label for="roomLengthLightsTotalSize" style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;"><strong>Total size:</strong></label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" onchange="getNumLights()" id="roomLengthLightsTotalSize" type="number">
+                <span class="input-group-append">
+                  <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;"><span class="m2p2Ft">ft</span><sup>2</sup></span>
+                                        </span>
+                <!--                  <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="input-group-text m2p2Ft">ft<sup>2</sup>-->
+                <!--                  <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="m2p2Ft">ft</span><sup style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">2</sup>-->
+              </div>
+            </div>
+          </div>
+          <div class="container">
+
+            <div class="mt-4 text-center">
+              <div class="div1"></div>
+            </div>
+
+          </div>
+        </form>
+
+        <div class="row">
+          <div class="col-12 col-md-12 mt-4">
+            <div>
+              <label for="roomLengthLightsTotalSize" style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;"><strong>Number of fixtures needed according to lamp output for <span id="sqfTotal">9</span> <span class="m2p2Ft">ft</span><sup>2</sup> :</strong></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">Power</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" value="Minimum" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" value="Optimal" disabled="disabled" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;">315W</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total315" type="button" value="" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total315o" type="button" value="" disabled="disabled" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;">400W</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total400" type="button" value="" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total400o" type="button" value="" disabled="disabled" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;">600W</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total600" type="button" value="" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total600o" type="button" value="" disabled="disabled" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;">630W</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total630" type="button" value="" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total630o" type="button" value="" disabled="disabled" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;">750W</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total750" type="button" value="" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total750o" type="button" value="" disabled="disabled" />
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-4"><span style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;">1000W</span></div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total1000" type="button" value="" disabled="disabled" />
+          </div>
+          <div class="col-4">
+            <input style="background-color: #EEEEEE; border: none; font-weight:normal; color: #1b5e20; font-size: 1em;" id="total1000o" type="button" value="" disabled="disabled" />
+          </div>
+        </div>
+        <div class="container">
+          <div class="mt-4 text-center">
+            <button style="width: 100%;" class="btn btn-warning col-12 mt-4" onClick="window.location.reload();">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.min.js"></script>
+    <script src="./assets/js/core/popper.min.js"></script>
+    <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+<!--    <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>-->
+    <script src="./assets/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
+    <script>
+      // Changes arrow direction
+
+      function changeArrow() {
+
+        var arrowDiv = $('#arrowDiv');
+        var arrowImg = $('#arrowImg');
+
+        if (arrowDiv.attr('aria-expanded') === 'false') {
+          arrowImg.attr("src", "assets/img/arrow-137-24.ico");
+        } else {
+          arrowImg.attr("src", "assets/img/arrow-199-24.ico");
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("<input class='btn btn-success' name='calcul' type='button' value='Calculate' style='width: 100%;' />").insertAfter(".div1");
+      });
+    </script>
+
+    <script language="javascript" async defer>
+      var globalUnit = 'in';
+
+      $(function() {
+        unitChangerCalc()
+      });
+
+      function maxNum(field, unit) {
+        var value = Number(field.value, 10),
+                max = Number(field.max, 10),
+                min = Number(field.min, 10);
+        if (value > max) {
+          field.value = max;
+          value = max;
+        } else if (value < min && unit !== 'm') {
+          field.value = min;
+          value = min;
+        }
+        return value;
+      }
+
+      // The power P in BTUs per hour (BTU/hr) is equal to 3.412141633 times the power P in watts (W):
+      function getNumLights() {
+        var roomLightUnit = document.getElementById("roomLightUnit").value,
+                ow = document.getElementById("roomWidthLights"),
+                ol = document.getElementById("roomLengthLights"),
+                ot = document.getElementById("NumberTrays"),
+                oTotals = document.getElementById("roomLengthLightsTotalSize"),
+                sqfTotal = document.getElementById("sqfTotal"),
+                t315 = document.getElementById("total315"),
+                t400 = document.getElementById("total400"),
+                t600 = document.getElementById("total600"),
+                t630 = document.getElementById("total630"),
+                t750 = document.getElementById("total750"),
+                t1000 = document.getElementById("total1000"),
+                t315o = document.getElementById("total315o"),
+                t400o = document.getElementById("total400o"),
+                t600o = document.getElementById("total600o"),
+                t630o = document.getElementById("total630o"),
+                t750o = document.getElementById("total750o"),
+                t1000o = document.getElementById("total1000o"),
+                w = maxNum(ow, roomLightUnit),
+                l = maxNum(ol, roomLightUnit),
+                t = maxNum(ot, roomLightUnit),
+                area,
+                areaM,
+                mininum = 30,
+                optimal = 50,
+                totalMin,
+                totalOptimal;
+
+        /*
+
+        min size of trays =     36 in by 36 in
+                                3 ft by 3 ft
+                                0,9144 m by 0,9144 m
+
+        ft to m =
+        m to ft =
+
+        36 pouces = 0.9144018288036576 M
+        36 pouces = 3 FT
+
+        1 mètre = 3.2808 pieds
+        1 pieds a metre = pieds / 3.281;
+        1 metre a pieds = metre * 3.281;
+        1 pieds a pouces = pieds / 12;
+        1 pouces a pieds = pouces * 12;
+
+        1 metre = 30w * 3.2808
+        1 metre = 50w * 3.2808
+
+        1 pied = 0.3048 mètre
+        mininum 1 pied = 30W
+        optimal 1 pied = 50W
+
+        */
+
+        //            if(roomLightUnit === 'm'){
+        //                mininum = mininum * 3.281;
+        //                optimal = optimal * 3.281;
+        //            }
+
+        // replace feet by meters or inches in the calculator
+        var elm2p2 = document.getElementsByClassName("m2p2"),
+                elTotalm2p2 = document.getElementsByClassName("m2p2Ft");
+
+        for (var i = 0, length = elm2p2.length; i < length; i++) {
+          elm2p2[i].innerHTML = roomLightUnit;
+        }
+
+        if (roomLightUnit !== 'in') {
+          for (var i = 0, length = elTotalm2p2.length; i < length; i++) {
+            elTotalm2p2[i].innerHTML = roomLightUnit;
+          }
+        }
+
+        if (roomLightUnit === 'm') {
+          area = (w * l * t).toFixed(3);
+          areaM = (Math.round(w * 3.281) * Math.round(l * 3.281) * t).toFixed(3);
+        } else if (roomLightUnit === 'in') {
+          area = (w / 12) * (l / 12) * t;
+        } else {
+          area = w * l * t;
+        }
+
+        oTotals.value = area;
+        sqfTotal.innerHTML = area;
+        totalMin = area * mininum;
+        totalOptimal = area * optimal;
+        if (roomLightUnit === 'm') {
+          totalMin = areaM * mininum;
+          totalOptimal = areaM * optimal;
+        } else {
+          totalMin = area * mininum;
+          totalOptimal = area * optimal;
+        }
+
+        t315.value = Math.ceil(totalMin / 315);
+        t315o.value = Math.ceil(totalOptimal / 315);
+        t400.value = Math.ceil(totalMin / 400);
+        t400o.value = Math.ceil(totalOptimal / 400);
+        t600.value = Math.ceil(totalMin / 600);
+        t600o.value = Math.ceil(totalOptimal / 600);
+        t630.value = Math.ceil(totalMin / 630);
+        t630o.value = Math.ceil(totalOptimal / 630);
+        t750.value = Math.ceil(totalMin / 750);
+        t750o.value = Math.ceil(totalOptimal / 750);
+        t1000.value = Math.ceil(totalMin / 1000);
+        t1000o.value = Math.ceil(totalOptimal / 1000);
+
+      }
+
+      // =======================================================================
+      //              unit changing calc
+      // =======================================================================
+      function unitChangerCalc() {
+        var unit = document.getElementById("roomLightUnit").value,
+                N1 = document.getElementById("roomWidthLights"),
+                N2 = document.getElementById("roomLengthLights"),
+                m1 = Number(N1.value, 10),
+                m2 = Number(N2.value, 10);
+
+        // console.log( 'globalUnit', globalUnit, 'to ', unit );
+
+        if (unit === 'ft' && globalUnit === 'in') { // inches to feet
+          N1.value = m1 / 12;
+          N2.value = m2 / 12;
+        } else if (unit === 'm' && globalUnit === 'in') { // inches to meters
+          N1.value = (m1 / 39.37).toFixed(3);
+          N2.value = (m2 / 39.37).toFixed(3);
+        } else if (unit === 'in' && globalUnit === 'ft') { // feet to inches
+          N1.value = m1 * 12;
+          N2.value = m2 * 12;
+        } else if (unit === 'm' && globalUnit === 'ft') { // feet to meters
+          N1.value = (m1 / 3.281).toFixed(3);
+          N2.value = (m2 / 3.281).toFixed(3);
+        } else if (unit === 'ft' && globalUnit === 'm') { // meters to feet
+          N1.value = Math.round(m1 * 3.281);
+          N2.value = Math.round(m2 * 3.281);
+        } else if (unit === 'in' && globalUnit === 'm') { // meters to inches
+          N1.value = Math.round(m1 * 39.37);
+          N2.value = Math.round(m2 * 39.37);
+        }
+        globalUnit = unit;
+        getNumLights();
+      }
+    </script>
+<div class="top-scroller">
+  <img src="assets/img/arrow-137-24.ico">
+</div>
+<script>
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.top-scroller').fadeIn();
+    } else {
+      $('.top-scroller').fadeOut();
+    }
+  });
+  //Click event to scroll to top
+  $('.top-scroller').click(function(){
+    $('html, body').animate({scrollTop : 0},1000);
+    return false;
+  });
+
+</script>
+</body>
+</html>

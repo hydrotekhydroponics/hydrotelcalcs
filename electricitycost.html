@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Hydrotek Hydroponics Calculators
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- CSS Files -->
+  <link href="./assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  <style>
+    .top-scroller {
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      font-size: 1em;
+      display: none;
+      z-index: 2;
+      text-align: center;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.35);
+      color: #fff;
+      line-height: 40px;
+
+    }
+    .top-scroller:hover {
+      background: rgba(0,0,0,.6);
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+    <div class="logo text-center">
+      <a style="font-size: 11pt;" class="simple-text logo-normal">
+        Changer la Langue
+      </a>
+      <a href="fr/electricitycost.html"><img src="./assets/img/icons8-france-48.png"></a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item active  ">
+          <a class="nav-link text-center" href="./index.html">
+            <p>All Calculators</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./reservoir.html">
+            <img src="assets/img/icons8-water-tower-30.png"><span> Reservoir Volume</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2operating.html">
+            <img src="assets/img/icons8-time-30.png"><span> CO2 Operating Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2generator.html">
+            <img src="assets/img/icons8-co2-gauge-30.png"><span> CO2 Generator Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2injector.html">
+            <img src="assets/img/icons8-scuba-pressure-gauge-30.png"><span> CO2 Injector Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./dehumidifier.html">
+            <img src="assets/img/icons8-dew-point-30.png"><span> Dehumidifier Sizing</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./aircfm.html">
+            <img src="assets/img/icons8-air-quality-30.png"><span> Air Exchange CFM</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./cultureroom.html">
+            <img src="assets/img/icons8-room-30.png"><span> Culture Room Area</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./lightfixtures.html">
+            <img src="assets/img/icons8-idea-30.png"><span> Light Fixtures Coverage</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./watt2btu.html">
+            <img src="assets/img/icons8-lightning-bolt-30.png"><span> Watt to BTU/hr Converter</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./circuitload.html">
+            <img src="assets/img/icons8-integrated-circuit-30.png"><span> Circuit Load Capacity</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./electricitycost.html">
+            <img src="assets/img/icons8-estimate-30.png"><span> Electricity Cost</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./soil.html">
+            <img src="assets/img/icons8-sprout-30.png"><span> Soil Calculator</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./support.html">
+            <img src="assets/img/contact.png"><span> Support / Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center">
+    <img class="img-fluid" style="max-width: 80%; margin-top: 20px;" src="assets/img/hydro-logo.png">
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+
+        <div class="navbar-wrapper">
+          <!--            <a class="navbar-brand" href="#pablo">HH Calculators</a>-->
+
+          <!--            <div class="row text-center">-->
+          <!--              <img class="img-container" src="assets/img/hydro-logo.png">-->
+          <!--            </div>-->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div id="arrowDiv" data-toggle="collapse" href="#collapseInfo" role="button" aria-expanded="false" aria-controls="collapseInfo" class="card-header card-header-warning" onclick="changeArrow()">
+                <div class="ct-chart"></div>
+                <span><strong>Electricity Cost Calculator</strong><img id="arrowImg" class="float-right" src="assets/img/arrow-199-24.ico"></span>
+              </div>
+              <div class="card-footer">
+                <div class="collapse" id="collapseInfo">
+                  <p>Determine the total electrical costs of your grow room and also accounts for the surplus amps used by your ballasts. You will notice that magnetic ballasts use slightly more electricity than electronic ones.</p>
+                  <p>These estimates assume the ballasts, lamps, and reflectors used for your hydroponic garden are new and in great shape. Installing used grow lights or old ballasts will increase electricity consumption and your overall costs.</p>
+                  <p><strong>* The electricity cost has been set at $0,0892 per kWh, for a more accurate estimate enter your local providers rate below. &mdash;&nbsp;The cost will be higher if you use old lamps and/or old transformers.</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="calcfrm">
+
+          <label for="nombre"><strong>Select the type of lighting used:</strong></label>
+          <select style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="nombre" name="nombre" size="1">
+<!--            <option value="&#45;&#45;">Choose an option</option>-->
+<!--            <option value="60">55W neon tube </option>-->
+<!--            <option value="310">250W magnetic ballast</option>-->
+<!--            <option value="255">250W electronic ballast</option>-->
+<!--            <option value="396">Lightspeed CMH 315W magnetic ballast</option>-->
+<!--            <option value="340">Lightspeed CMH 315W electronic ballast</option>-->
+<!--            <option value="491">400W magnetic ballast</option>-->
+<!--            <option value="410">400W electronic ballast</option>-->
+<!--            <option value="600">Zelion LED HL300 Grow Light</option>-->
+<!--            <option value="740">600W magnetic ballast</option>-->
+<!--            <option value="630">600W electronic ballast</option>-->
+<!--            <option value="1086">Agrolux 1000W digital ballast</option>-->
+<!--            <option value="1150">1000W magnetic ballast</option>-->
+<!--            <option value="1050">1000W electronic ballast</option>-->
+            <option value="--">Choose an option</option>
+            <option value="50">40W neon tube </option>
+            <option value="60">55W neon tube </option>
+            <option value="310">250W magnetic ballast</option>
+            <option value="255">250W electronic ballast</option>
+            <option value="396">Lightspeed CMH 315W magnetic ballast</option>
+            <option value="340">Lightspeed CMH 315W electronic ballast</option>
+            <option value="491">400W magnetic ballast</option>
+            <option value="410">400W electronic ballast</option>
+            <option value="600">Zelion LED HL300 Grow Light</option>
+            <option value="740">600W magnetic ballast</option>
+            <option value="630">600W electronic ballast</option>
+            <option value="1086">1000W Agrolux digital ballast</option>
+            <option value="1150">1000W magnetic ballast</option>
+            <option value="1050">1000W electronic ballast</option>
+          </select>
+
+          <div class="row mt-3">
+            <div class="col-sm-12">
+              <label for="ampoule"><strong>Number of lamps used:</strong></label>
+              <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="ampoule" maxlength="3" name="ampoule" size="2" type="text" value="1" />
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-sm-12">
+              <label for="heures"><strong>Number of hours lighted per day:</strong></label>
+              <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="heures" maxlength="2" name="heures" size="2" type="text" value="12" />
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-sm-12">
+              <label for="jours"><strong>Number of days used:</strong></label>
+              <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="jours" maxlength="3" name="jours" size="2" type="text" value="1" />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <label for="coutkWh"><strong>Cost per kWh:</strong></label>
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="coutkWh" name="coutkWh" size="2" type="number" value="0.0892" />&nbsp;<span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">cents</span></div>
+            </div>
+          </div>
+
+          <div class="container">
+
+            <div class="mt-4 text-center" >
+              <div class="div1"></div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;"><strong>Results:</strong></label>
+              </div>
+            </div>
+            <div class="col-12 mt-2">
+              <div>
+                <label for="amp"><strong>kWh consumed:</strong></label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="amp" name="amp" size="6" type="number" value="">
+                <span class="input-group-append">
+                  <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">kWh</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-2">
+              <div>
+                <label for="cout"><strong>Electricity cost:</strong></label>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="cout" name="cout" size="6" type="number" value="">
+                <span class="input-group-append">
+                      <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">$</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="coutJ" name="coutJ" size="6" type="number" value="">
+                <span class="input-group-append">
+                      <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">$/day</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="coutM" name="coutM" size="6" type="number" value="">
+                <span class="input-group-append">
+                      <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">$/month</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="coutA" name="coutA" size="6" type="number" value="">
+                <span class="input-group-append">
+                      <span style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;">$/year</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <button style="width: 100%;" class="btn btn-warning col-12 mt-4" onClick="window.location.reload();">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.min.js"></script>
+<!--<script src="./assets/js/core/popper.min.js"></script>-->
+<script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+<!--<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>-->
+<script src="./assets/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
+<script>
+  // Changes arrow direction
+
+  function changeArrow() {
+
+    var arrowDiv = $('#arrowDiv');
+    var arrowImg = $('#arrowImg');
+
+    if (arrowDiv.attr('aria-expanded') === 'false') {
+      arrowImg.attr("src", "assets/img/arrow-137-24.ico");
+    } else {
+      arrowImg.attr("src", "assets/img/arrow-199-24.ico");
+    }
+  }
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("<input name='calcul' type='button' value='Calculate' class='btn btn-success' style='width: 100%;' onclick='Amp_calc(this.form)' />").insertAfter(".div1");
+  });
+</script>
+
+<script language="javascript">
+  function Amp_calc(t) {
+    this.tarif = t.coutkWh.value, this.tarif && "" !== this.tarif || (this.tarif = .0892, document.getElementById("coutkWh").value = this.tarif), this.light = t.nombre.value, "--" === this.light && (this.light = ""), this.hours = t.heures.value, this.days = t.jours.value, this.lampUsed = t.ampoule.value, void 0 !== validateFormSelect("nombre", this.light) && void 0 !== validateForm("ampoule", this.lampUsed, 1, 999) && void 0 !== validateForm("heures", this.hours, 1, 24) && void 0 !== validateForm("jours", this.days, 1, 365) ? (this.ampValue = function() {
+      return 365 === this.days && (this.days = 365.25), this.light * this.hours * this.days * (this.lampUsed / 1e3)
+    }, t.amp.value = ampValue().toFixed(0), this.cout = ampValue() * this.tarif, this.coutJ = this.cout / this.days, this.coutM = 30.4375 * this.coutJ, this.coutA = 365.25 * this.coutJ, t.cout.value = this.cout.toFixed(2), t.coutJ.value = this.coutJ.toFixed(2), t.coutM.value = this.coutM.toFixed(2), t.coutA.value = this.coutA.toFixed(2)) : (t.amp.value = "", t.cout.value = "")
+  }
+
+  function insertAfter(t, e) {
+    e.parentNode.insertBefore(t, e.nextSibling)
+  }
+
+  function addElementAfter(t, e) {
+    return document.getElementById(t + "Msg") && (document.getElementById(t + "Msg").remove(), document.getElementById(t).style = ""), "" !== e ? (this.newEl = document.createElement("span"), this.newEl.innerHTML = e, this.newEl.style = "color: #c00; font-weight: bold;", this.newEl.id = t + "Msg", this.ref = document.getElementById(t), insertAfter(this.newEl, this.ref), document.getElementById(t).focus(), document.getElementById(t).select(), !1) : void 0
+  }
+
+  function validateFormSelect(t, e) {
+    return this.el = e, this.elMsg = "", "" !== this.el ? (this.elMsg = "", addElementAfter(t, elMsg), !0) : (this.elMsg = "Please, make a selection.", void addElementAfter(t, elMsg))
+  }
+
+  function validateForm(t, e, s, i) {
+    if (this.el = e, this.elMsg = "", "" === this.el || isNaN(this.el)) isNaN(this.el) ? this.elMsg = "Should be a number." : this.elMsg = "Please, insert a number.", addElementAfter(t, elMsg);
+    else {
+      if (!(this.el < s || this.el > i)) return this.elMsg = "", addElementAfter(t, elMsg), !0;
+      this.elMsg = "This field must be a number between " + s + " and " + i + ".", addElementAfter(t, elMsg)
+    }
+  }
+</script>
+<div class="top-scroller">
+  <img src="assets/img/arrow-137-24.ico">
+</div>
+<script>
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.top-scroller').fadeIn();
+    } else {
+      $('.top-scroller').fadeOut();
+    }
+  });
+  //Click event to scroll to top
+  $('.top-scroller').click(function(){
+    $('html, body').animate({scrollTop : 0},1000);
+    return false;
+  });
+
+</script>
+
+</body>
+
+</html>

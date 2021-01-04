@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Hydrotek Hydroponics Calculators
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- CSS Files -->
+  <link href="./assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  <style>
+    #soilCalcFrm input,
+    #soilCalcFrm textarea,
+    #soilCalcFrm select,
+    #soilCalcFrm option {
+      max-width: 100%;
+      height: 2.2rem;
+      padding: 3px 8px;
+      border-color: dimgray;
+    }
+
+    #addRectangle,
+    #addRound {
+      margin-right: 9px !important;
+    }
+
+    input.all-radius,
+    .all-radius {
+      border-radius: 3px !important;
+    }
+
+    input.tr-br-radius,
+    .tr-br-radius {
+      border-top-right-radius: 3px !important;
+      border-bottom-right-radius: 3px !important;
+      border-left: 0 !important;
+    }
+
+    input.tl-bl-radius,
+    .tl-bl-radius {
+      border-top-left-radius: 3px !important;
+      border-bottom-left-radius: 3px !important;
+      border-right: 0 !important;
+    }
+
+    .iheight {
+      line-height: normal;
+      margin-bottom: 0;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #000;
+      border: 1px solid #ffffff;
+      -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, .05);
+      -moz-box-shadow: inset 0 1px 1px rgba(255, 255, 255, .05);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, .05);
+    }
+
+    #soilCalcFrm .alert {
+      background: initial;
+    }
+
+    #soilCalcFrm .btn {
+      border-radius: 5px !important;
+      margin: 0.5rem auto;
+    }
+
+    #soilCalcFrm .alert-success,
+    #soilCalcFrm .btn-success {
+      background: rgba(87, 185, 86, .7);
+    }
+
+    #soilCalcFrm .alert-info,
+    #soilCalcFrm .btn-info {
+      background: rgba(126, 210, 240, .8);
+    }
+
+    #soilCalcFrm .alert-warning,
+    #soilCalcFrm .btn-warning {
+      background: rgba(100, 66, 41, 1);
+    }
+
+    #soilCalcFrm .alert-danger,
+    #soilCalcFrm .btn-danger {
+      background: rgba(29, 69, 146, 0.25);
+      color: rgba(29, 69, 146, 1);
+      border-color: rgba(29, 69, 146, 1);
+    }
+
+    #soilCalcFrm .alert-primary {
+      color: rgba(87, 185, 86, 1);
+      background-color: rgba(87, 185, 86, .10);
+      border-color: rgba(87, 185, 86, 1);
+    }
+
+    #soilCalcFrm .alert.alert-primary h4 {
+      color: rgba(29, 69, 146, 1);
+      font-size: 1.75rem !important;
+      line-height: normal;
+      font-weight: normal;
+      text-align: right;
+      text-transform: initial;
+      margin-right: 0.75rem;
+      background: transparent !important;
+      font-family: sans-serif;
+    }
+
+    #soilCalcFrm .alert.alert-primary h4 #totalUnit-1,
+    #soilCalcFrm .alert.alert-primary h4 #totalUnit-2,
+    #soilCalcFrm .alert.alert-primary h4 #totalUnit-3 {
+      font-size: 75%;
+      line-height: 1px;
+    }
+
+    #soilCalcFrm .alert.alert-primary h4 #totalUnit-1:after,
+    #soilCalcFrm .alert.alert-primary h4 #totalUnit-2:after {
+      content: " | ";
+      color: rgba(87, 185, 86, 1);
+      line-height: 1px;
+      font-size: 2rem;
+      font-weight: 100;
+    }
+
+    #soilCalcFrm .text-danger {
+      color: rgba(29, 69, 146, 1);
+      font-size: 3rem !important;
+      line-height: normal;
+      margin-right: 0.75rem;
+    }
+
+    #soilCalcFrm .text-primary {
+      color: rgba(87, 185, 86, 1);
+      font-size: 3rem !important;
+      line-height: normal;
+      margin-right: 0.75rem;
+    }
+
+    .hideMe {
+      display: none !important;
+    }
+
+    .showMe {
+      display: block !important;
+    }
+
+    #soilCalcFrm label {
+      display: inline;
+    }
+
+    #soilCalcFrm.soilCalcFrm label {
+      text-align: left;
+      font-size: 0.75rem;
+    }
+
+    #soilCalcFrm.soilCalcFrm .qtyLabel input {
+      min-width: 4rem;
+    }
+
+    #soilCalcFrm.soilCalcFrm .unitLabel input {
+      min-width: 3rem;
+    }
+
+    #soilCalcFrm.soilCalcFrm label > input {
+      /*  margin-left: 5px;*/
+    }
+
+    #soilCalcFrm select {
+      /* reset */
+      margin: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    /* arrows */
+
+    #soilCalcFrm select.minimal {
+      background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
+      background-position: calc(100% - 15px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+      background-size: 5px 5px, 5px 5px, 1px 1.5em;
+      background-repeat: no-repeat;
+    }
+
+    #soilCalcFrm select.minimal:focus {
+      background-image: linear-gradient(45deg, green 50%, transparent 50%), linear-gradient(135deg, transparent 50%, green 50%), linear-gradient(to right, #ccc, #ccc);
+      background-position: calc(100% - 10px) 1em, calc(100% - 15px) 1em, calc(100% - 2.5em) 0.5em;
+      background-size: 5px 5px, 5px 5px, 1px 1.5em;
+      background-repeat: no-repeat;
+      border-color: green;
+      outline: 0;
+    }
+
+    #soilCalcFrm .alert {
+      text-shadow: none;
+    }
+
+    #soilCalcFrm .alert .close {
+      position: relative;
+      top: 0;
+      right: 0;
+      line-height: 20px;
+    }
+
+    #soilCalcFrm button.close {
+      padding: 1px 5px;
+      cursor: pointer;
+      background: #fff;
+      border: 0;
+      -webkit-appearance: none;
+      border-top-right-radius: 3px;
+    }
+
+    #soilCalcFrm .close {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: 0.4;
+      filter: alpha(opacity=40);
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+    <div class="logo text-center">
+      <a style="font-size: 11pt;" class="simple-text logo-normal">
+        Changer la Langue
+      </a>
+      <a href="fr/soil.html"><img src="./assets/img/icons8-france-48.png"></a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item active  ">
+          <a class="nav-link text-center" href="./index.html">
+            <p>All Calculators</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./reservoir.html">
+            <img src="assets/img/icons8-water-tower-30.png"><span> Reservoir Volume</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2operating.html">
+            <img src="assets/img/icons8-time-30.png"><span> CO2 Operating Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2generator.html">
+            <img src="assets/img/icons8-co2-gauge-30.png"><span> CO2 Generator Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2injector.html">
+            <img src="assets/img/icons8-scuba-pressure-gauge-30.png"><span> CO2 Injector Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./dehumidifier.html">
+            <img src="assets/img/icons8-dew-point-30.png"><span> Dehumidifier Sizing</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./aircfm.html">
+            <img src="assets/img/icons8-air-quality-30.png"><span> Air Exchange CFM</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./cultureroom.html">
+            <img src="assets/img/icons8-room-30.png"><span> Culture Room Area</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./lightfixtures.html">
+            <img src="assets/img/icons8-idea-30.png"><span> Light Fixtures Coverage</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./watt2btu.html">
+            <img src="assets/img/icons8-lightning-bolt-30.png"><span> Watt to BTU/hr Converter</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./circuitload.html">
+            <img src="assets/img/icons8-integrated-circuit-30.png"><span> Circuit Load Capacity</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./electricitycost.html">
+            <img src="assets/img/icons8-estimate-30.png"><span> Electricity Cost</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./soil.html">
+            <img src="assets/img/icons8-sprout-30.png"><span> Soil Calculator</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./support.html">
+            <img src="assets/img/contact.png"><span> Support / Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center">
+    <img class="img-fluid" style="max-width: 80%; margin-top: 20px;" src="assets/img/hydro-logo.png">
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div id="arrowDiv" data-toggle="collapse" href="#collapseInfo" role="button" aria-expanded="false" aria-controls="collapseInfo" class="card-header card-header-warning" onclick="changeArrow()">
+                <div class="ct-chart"></div>
+                <span><strong>Soil Calculator &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><img class="float-right" id="arrowImg" src="assets/img/arrow-199-24.ico"></span>
+              </div>
+              <div class="card-footer">
+                <div class="collapse" id="collapseInfo">
+                  <p>You want to know how much soil you will be needing and you have round and square pots in your hydroponic environment, you might also be using <strong>RhizoPot</strong>.</p>
+                  <p>We have created this Soil Calculator so it's easy for you to figure out the total amount of soil you will be needing.</p>
+                  <p>* Note that proportions are approximate because soil volume varies, we recommend to round up the total.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form lpformnum="1" class="calcfrm">
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <div>
+                <label for="isImperial"><strong>Measurement unit:</strong></label>
+                <select style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" id="isImperial">
+                  <option value="false">Imperial</option>
+                  <option value="true">Metric</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row text-center mt-4">
+            <div class="col-12">
+              <button style="width: 100%; padding: 5px" id="addRectangle" class="btn btn-success" type="button" rel-fonction="addbtn"><span class="fa fa-plus"></span><span style="font-weight: bolder; font-size: larger">+</span> Rectangular Container</button>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-12">
+              <button style="width: 100%; padding: 5px" id="addRound" class="btn btn-info" type="button" rel-fonction="addbtn"><span class="fa fa-plus"></span><span style="font-weight: bolder; font-size: larger">+</span> Round Container</button>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-12 ">
+              <button style="width: 100%; padding: 5px; background-color: #796329" id="addRhizoPot" class="btn" type="button" rel-fonction="addbtn"><span class="fa fa-plus"></span><span style="font-weight: bolder; font-size: larger">+</span> RhizoPot</button>
+            </div>
+          </div>
+          <div class="row text-center">
+            <!--            <div class="col-12 col-md-6">-->
+            <!--              <button style="width: 90%; padding: 5px; background-color: #796329;" id="addRhizoPot" class="btn" type="button" rel-fonction="addbtn"><span class="fa fa-plus"></span><span style="font-weight: bolder; font-size: larger">+</span> RhizoPot</button>-->
+            <!--            </div>-->
+          </div>
+
+          <div class="mt-3" id="bodyboxRct"></div>
+          <div class="mt-3" id="bodyboxRnd"></div>
+          <div class="mt-3" id="bodyboxRhizo"></div>
+
+          <div class="text-center" id="starterMsg">
+            <div style="background-color: #FFC2C2;" class="alert"><em class="text-danger" aria-hidden="true"></em> <strong>↑ Add a container to get started ↑</strong></div>
+          </div>
+          <div class="hideMe" id="TotalMsg">
+            <div class="alert" id="totalCalc" style="border: 1px solid orangered; background-color: #DEDEDE;">
+              <div class="text-center">
+                <span class="mb-3 text-left"><strong>Results:</strong></span>
+                <span class="text-left" id="totalResult"></span>
+              </div>
+              <div class="" id="mediumQty">
+                <div class="">
+                  <h5 class="mt-3"><strong>You need:</strong></h5>
+                  <a target="_blank" href="https://www.hydrotekhydroponics.com/products-search?qs=proterra/"><span title="ProTerra" class="btn btn-large text-left mb-2" style="background-color: #373737; color:#f2f2f2; padding: 2%;"><strong><span style="display: inline;" id="proterraBags"></span></strong> bag<span style="display: inline;" id="ptS"> </span> of <strong>ProTerra</strong><br /><small style="font-size: .4rem"><em>* Based on the decompressed soil volume</em></small></span></a>
+                  <span class="text-left"><strong>or</strong></span>
+                  <a target="_blank" href="https://www.hydrotekhydroponics.com/cyco-coco-coir-50l-110169/"><span title="Cyco Coco Coir" class="btn btn-large text-left" style="background-color: forestgreen; color:#f2f2f2; padding: 2%;"><strong><span style="display: inline;" id="cocoCoirBags"></span></strong> bag<span style="display: inline;" id="cccS"> </span> of <strong>Cyco Coco Coir</strong></span></a>
+                  <span class="text-left"><strong>or</strong></span>
+                  <a target="_blank" href="https://www.hydrotekhydroponics.com/cyco-coco-pearl-50l-110170/"><span title="Cyco Coco Pearl" class="btn btn-large text-left" style="background-color: #A56130; color:#f2f2f2; padding: 2%"><strong><span style="display: inline;" id="cocoPearlBags"></span></strong> bag<span style="display: inline;" id="ccpS"> </span> of <strong>Cyco Coco Pearl</strong></span></a>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-warning col-12" onClick="window.location.reload();">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.min.js"></script>
+<script src="./assets/js/core/popper.min.js"></script>
+<script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+<!--<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>-->
+<script src="./assets/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
+<script>
+  // Changes arrow direction
+
+  function changeArrow() {
+
+    var arrowDiv = $('#arrowDiv');
+    var arrowImg = $('#arrowImg');
+
+    if (arrowDiv.attr('aria-expanded') === 'false') {
+      arrowImg.attr("src", "assets/img/arrow-137-24.ico");
+    } else {
+      arrowImg.attr("src", "assets/img/arrow-199-24.ico");
+    }
+  }
+</script>
+
+<script type="application/javascript">
+  $(document).ready(function() {
+    var btnClicked = $("[rel-fonction$='addbtn']"),
+            btnChange = '',
+            addRectangle = '<div class="" rel-id="square-{{x}}" id="square-{{x}}">' + '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>' + '<div class="row mt-3">' + '<div class="col-12">' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Quantity:</span></div>' + '</div>' + '<input style="color: whitesmoke; font-weight: bold" type="text" class="form-control" id="rect-quantity-{{x}}" rel-pos="y" rel-el="quantity" rel="uselector" min="1" max="9999" value="1">' + '</div>' + '</div>' + '<div class="col-12">' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Length:&nbsp;&nbsp;&nbsp;</span></div>' + '</div>' + '<input style="color: whitesmoke; font-weight: bold" type="number" class="form-control" id="rect-length-{{x}}" rel-pos="y" rel-el="length" min="0" max="5000" rel="uselector" value="1"><select style="color: whitesmoke; border: none; -webkit-border-radius: 0px; text-align-last:center; background-color: rgba(0, 0, 0, 0)" id="rect-length-unit-{{x}}" rel-el="length">' + '<option value="inches">in</option>' + '<option value="feet">ft</option>' + '<option value="centimeters">cm</option>' + '<option value="meters">m</option>' + '<option value="yards">yd</option>' + '</select><span style="padding-top: 10px;">▼</span>' + '</div>' + '</div>' + '<div class="col-12">' + '<label class="sr-only"></label>' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Width:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>' + '</div>' + '<input style="color: whitesmoke; font-weight: bold" type="number" class="form-control" id="rect-width-{{x}}" rel-pos="y" rel-el="width" min="0" max="5000" rel="uselector" value="1"><select style="color: whitesmoke; border: none; -webkit-border-radius: 0px; text-align-last:center; background-color: rgba(0, 0, 0, 0)" id="rect-width-unit-{{x}}" rel-el="width">' + '<option value="inches">in</option>' + '<option value="feet">ft</option>' + '<option value="centimeters">cm</option>' + '<option value="meters">m</option>' + '<option value="yards">yd</option>' + '</select><span style="padding-top: 10px;">▼</span>' + '</div>' + '</div>' + '<div class="col-12">' + '<label class="sr-only" for="inlineFormInputGroup"></label>' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Depth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>' + '</div>' + '<input style="color: whitesmoke; font-weight: bold" type="number" class="form-control" id="rect-depth-{{x}}" rel-pos="y" rel-el="depth" min="0" max="5000" value="1" rel="uselector"><select style="color: whitesmoke; border: none; -webkit-border-radius: 0px; text-align-last:center; background-color: rgba(0, 0, 0, 0)" id="rect-depth-unit-{{x}}" rel-el="depth">' + '<option value="inches">in</option>' + '<option value="feet">ft</option>' + '<option value="centimeters">cm</option>' + '<option value="meters">m</option>' + '<option value="yards">yd</option>' + '</select><span style="padding-top: 10px;">▼</span>' + '</div>' + '</div>' + '<div class="col-12 text-center mt-3">' + '<button disabled style="background-color: #BDFBBB; color: black; font-size: 14px; width: 99%;" class="btn"><span id="rect-cm3-{{x}}" style="display:none"></span><span style="display: inline" id="rect-result-one-{{x}}">0</span><span style="display: inline" id="rect-one-unit-{{x}}"></span> / <span style="display: inline" id="rect-result-two-{{x}}">0</span><span style="display: inline" id="rect-two-unit-{{x}}"></span>' + '</button>' + '</div>' + '</div>',
+            addRound = '<div class="" rel-id="round-{{x}}" id="round-{{x}}">' + '<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>' + '<div class="row mt-3">' + '<div class="col-12">' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Quantity:&nbsp;</span></div>' + '</div>' + '<input type="number" id="round-quantity-{{x}}" rel-pos="y" rel="uselector" min="1" max="9999" value="1" style="color: whitesmoke; font-weight: bold" class="form-control">' + '</div>' + '</div>' + '<div class="col-12">' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Diameter:</span></div>' + '</div>' + '<input style="color: whitesmoke; font-weight: bold" type="number" class="form-control" id="round-diameter-{{x}}" rel-pos="y" min="0" max="5000" value="1" rel="uselector"><select style="color: whitesmoke; border: none; -webkit-border-radius: 0px; text-align-last:center; background-color: rgba(0, 0, 0, 0)" id="round-diameter-unit-{{x}}">' + '<option value="inches">in</option>' + '<option value="feet">ft</option>' + '<option value="centimeters">cm</option>' + '<option value="meters">m</option>' + '<option value="yards">yd</option>' + '</select><span style="padding-top: 10px;">▼</span>' + '</div>' + '</div>' + '<div class="col-12">' + '<label class="sr-only"></label>' + '<div class="input-group mb-2">' + '<div class="input-group-prepend">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Depth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>' + '</div>' + '<input style="color: whitesmoke; font-weight: bold" type="number" class="form-control" id="round-depth-{{x}}" rel-pos="y" min="0" max="5000" value="1" rel="uselector"><select style="color: whitesmoke; border: none; -webkit-border-radius: 0px; text-align-last:center; background-color: rgba(0, 0, 0, 0)" id="round-depth-unit-{{x}}">' + '<option value="inches">in</option>' + '<option value="feet">ft</option>' + '<option value="centimeters">cm</option>' + '<option value="meters">m</option>' + '<option value="yards">yd</option>' + '</select><span style="padding-top: 10px;">▼</span>' + '</div>' + '</div>' + '<div class="col-12 text-center mt-3">' + '<button disabled style="background-color: #BDFBBB; color: black; font-size: 14px; width: 99%;" class="btn"><span id="rnd-cm3-{{x}}" style="display:none"></span><span style="display: inline" id="rnd-result-one-{{x}}">0</span><span style="display: inline" id="rnd-one-unit-{{x}}"></span> / <span style="display: inline" id="rnd-result-two-{{x}}">0</span><span style="display: inline" id="rnd-two-unit-{{x}}"></span>' + '</button>' + '</div>' + '</div>',
+            addRhizoPot = '<div class="" rel-id="RhizoPot-{{x}}" id="RhizoPot-{{x}}">' + '<div class="alert" style="background-color: #796329"><button type="button" class="close" data-dismiss="alert">&times;</button>' + '<div class="row mt-3">' + '<div class="col-12">' + '<div class="input-group mb-2">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Quantity:&nbsp;</span></div>' + '<input style="color: whitesmoke; font-weight: bold" type="number" class="form-control" id="rhiz-quantity-{{x}}" rel-pos="y" min="0" max="5000" value="1" rel="uselector">' + '</div>' + '<div class="row mt-3">' + '<div class="col-12">' + '<div class="input-group mb-2">' + '<div style="color: whitesmoke" class="input-group-text"><span style="font-size: 14px;">Size:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>' + '<select style="color: whitesmoke; padding-left: 5px;" class="form-control" id="rhiz-pots-{{x}}">' + '<option value="0">Select</option>' + '<option value="1">RhizoPot 1 Gallon</option>' + '<option value="2">RhizoPot 2 Gallon</option>' + '<option value="3">RhizoPot 3 Gallon</option>' + '<option value="5">RhizoPot 5 Gallon</option>' + '<option value="7">RhizoPot 7 Gallon</option>' + '<option value="10">RhizoPot 10 Gallon</option>' + '<option value="15">RhizoPot 15 Gallon</option>' + '<option value="20">RhizoPot 20 Gallon</option>' + '<option value="25">RhizoPot 25 Gallon</option>' + '<option value="30">RhizoPot 30 Gallon</option>' + '<option value="35">RhizoPot 35 Gallon</option>' + '<option value="45">RhizoPot 45 Gallon</option>' + '</select>' + '</div>' + '</div>' + '<div class="col-12 text-center mt-3">' + '<button disabled style="background-color: #BDFBBB; color: black; font-size: 14px; width: 99%;" class="btn"><span id="rhiz-cm3-{{x}}" style="display:none"></span><span style="display: inline" id="rhiz-result-one-{{x}}">0</span><span style="display: inline" id="rhiz-one-unit-{{x}}"></span> / <span style="display: inline" id="rhiz-result-two-{{x}}">0</span><span style="display: inline" id="rhiz-two-unit-{{x}}"></span>' + '</button>' + '</div>' + '</div>',
+            RecCount = 0,
+            RndCount = 0,
+            RhizoCount = 0,
+            mainUnit = document.getElementById('isImperial').value;
+
+    // on metric value change
+    $(document.getElementById('isImperial')).on('change', function(i) {
+      mainUnit = this.value;
+
+      if (this.value === 'false') {
+        $('span[id*="result-one"]:visible').each(function() {
+          var thisValue = document.getElementById((this.id).split("-")[0] + '-cm3-' + (this.id).split("-").pop()).innerHTML;
+          document.getElementById(this.id).innerHTML = roundNumber(cc2ft3(thisValue));
+        });
+        $('span[id*="one-unit-"]:visible').each(function() {
+          document.getElementById(this.id).innerHTML = ' ft<sup>3</sup>';
+        });
+        $('span[id*="result-two"]:visible').each(function() {
+          var thisValue = document.getElementById((this.id).split("-")[0] + '-cm3-' + (this.id).split("-").pop()).innerHTML;
+          document.getElementById(this.id).innerHTML = roundNumber(cc2qt(thisValue));
+        });
+        $('span[id*="two-unit-"]:visible').each(function() {
+          document.getElementById(this.id).innerHTML = ' quarts';
+        });
+      } else {
+        $('span[id*="result-one"]:visible').each(function() {
+          var thisValue = document.getElementById((this.id).split("-")[0] + '-cm3-' + (this.id).split("-").pop()).innerHTML;
+          document.getElementById(this.id).innerHTML = roundNumber(cc2m3(thisValue));
+        });
+        $('span[id*="one-unit-"]:visible').each(function() {
+          document.getElementById(this.id).innerHTML = ' m<sup>3</sup>';
+        });
+        $('span[id*="result-two"]:visible').each(function() {
+          var thisValue = document.getElementById((this.id).split("-")[0] + '-cm3-' + (this.id).split("-").pop()).innerHTML;
+          document.getElementById(this.id).innerHTML = roundNumber(cc2lt(thisValue));
+        });
+        $('span[id*="two-unit-"]:visible').each(function() {
+          document.getElementById(this.id).innerHTML = ' liters';
+        });
+      }
+      calAll(); // call for the total qty's result
+    });
+    // /on metric value change
+
+    // on btn click what happens is here
+    $(btnClicked).on('click', function(e) {
+      var addCnt = eval($(this).attr('id')),
+              thisBodyBox = '',
+              msgBox = document.getElementById('starterMsg'),
+              totalBox = document.getElementById('TotalMsg');
+      // change boxes
+      $(msgBox).removeClass('showMe').addClass('hideMe');
+      $(totalBox).removeClass('hideMe').addClass('showMe');
+
+      if (~$(this).attr('id').indexOf("Rectangle")) {
+        ++RecCount;
+        addCnt = addCnt.replace(/{{x}}/g, RecCount);
+        thisBodyBox = '#bodyboxRct';
+      } else if (~$(this).attr('id').indexOf("Round")) {
+        ++RndCount;
+        addCnt = addCnt.replace(/{{x}}/g, RndCount);
+        thisBodyBox = '#bodyboxRnd';
+      } else if (~$(this).attr('id').indexOf("RhizoPot")) {
+        ++RhizoCount;
+        addCnt = addCnt.replace(/{{x}}/g, RhizoCount);
+        thisBodyBox = '#bodyboxRhizo';
+      }
+      $(thisBodyBox).append(addCnt);
+
+      // add click on qty for the calc to be processed
+      var QtyFocus = $(addCnt).find('input').first().attr('id');
+      $("#" + QtyFocus).click();
+
+    });
+
+    //  if less than 1, we force 1
+    $("#bodyboxRct, #bodyboxRnd, #bodyboxRhizo").on("change", "[rel-pos$='y']", function(e) {
+      if (this.value < 1) {
+        this.value = 1;
+      }
+    });
+
+    $("#bodyboxRct, #bodyboxRnd, #bodyboxRhizo").on("select click change", "[rel-id]", function(e) {
+      // if RhizoPot
+      if (~this.id.indexOf("RhizoPot")) {
+        //console.log('Main ID', this.id );
+        var MainID = this.id,
+                IDnumber = MainID.replace('RhizoPot-', ''),
+                qty = document.getElementById('rhiz-quantity-' + IDnumber),
+                potValue = document.getElementById('rhiz-pots-' + IDnumber),
+                MainResult = document.getElementById('rhiz-result-' + IDnumber),
+                CM3total = document.getElementById('rhiz-cm3-' + IDnumber),
+                aResult = document.getElementById('rhiz-result-one-' + IDnumber),
+                aResultUnit = document.getElementById('rhiz-one-unit-' + IDnumber),
+                bResult = document.getElementById('rhiz-result-two-' + IDnumber),
+                bResultUnit = document.getElementById('rhiz-two-unit-' + IDnumber),
+                q = Number(qty.value),
+                volume;
+
+        //            console.log('main id RhizoPot -->', MainID);
+        volume = $(potValue).val() * 4404.884; // Dry Gallon to cm3
+
+      }
+      // if cylindar
+      if (~this.id.indexOf("round")) {
+        //console.log('Main ID', this.id );
+        var MainID = this.id,
+                IDnumber = MainID.replace('round-', ''),
+                qty = document.getElementById('round-quantity-' + IDnumber),
+                diameter = document.getElementById('round-diameter-' + IDnumber),
+                diametertUnit = document.getElementById('round-diameter-unit-' + IDnumber),
+                depth = document.getElementById('round-depth-' + IDnumber),
+                depthUnit = document.getElementById('round-depth-unit-' + IDnumber),
+                MainResult = document.getElementById('round-result-' + IDnumber),
+                CM3total = document.getElementById('rnd-cm3-' + IDnumber),
+                aResult = document.getElementById('rnd-result-one-' + IDnumber),
+                aResultUnit = document.getElementById('rnd-one-unit-' + IDnumber),
+                bResult = document.getElementById('rnd-result-two-' + IDnumber),
+                bResultUnit = document.getElementById('rnd-two-unit-' + IDnumber),
+                q = Number(qty.value),
+                di = Number(diameter.value),
+                diu = diametertUnit.value,
+                r = all2CM(di, diu) / 2,
+                d = Number(depth.value),
+                du = depthUnit.value,
+                volume;
+
+        //            console.log('main id rnd -->', MainID);
+
+        volume = Math.PI * Math.pow(r, 2) * all2CM(d, du);
+        console.log('r => ', r, Math.PI, '*', Math.pow(r, 2), ' * ', all2CM(d, du), ' = ', Math.PI * Math.pow(r, 2) * all2CM(d, du));
+
+      }
+      // if rectangular
+      if (~this.id.indexOf("square")) {
+        //console.log('Main ID', this.id );
+        var MainID = this.id,
+                IDnumber = MainID.replace('square-', ''),
+                qty = document.getElementById('rect-quantity-' + IDnumber),
+                lenght = document.getElementById('rect-length-' + IDnumber),
+                lenghtUnit = document.getElementById('rect-length-unit-' + IDnumber),
+                width = document.getElementById('rect-width-' + IDnumber),
+                widthUnit = document.getElementById('rect-width-unit-' + IDnumber),
+                depth = document.getElementById('rect-depth-' + IDnumber),
+                depthUnit = document.getElementById('rect-depth-unit-' + IDnumber),
+                MainResult = document.getElementById('rect-result-' + IDnumber),
+                CM3total = document.getElementById('rect-cm3-' + IDnumber),
+                aResult = document.getElementById('rect-result-one-' + IDnumber),
+                aResultUnit = document.getElementById('rect-one-unit-' + IDnumber),
+                bResult = document.getElementById('rect-result-two-' + IDnumber),
+                bResultUnit = document.getElementById('rect-two-unit-' + IDnumber),
+                q = Number(qty.value),
+                l = Number(lenght.value),
+                lu = lenghtUnit.value,
+                w = Number(width.value),
+                wu = widthUnit.value,
+                d = Number(depth.value),
+                du = depthUnit.value,
+                volume;
+
+        //            console.log('main id sqt -->', MainID);
+
+        volume = all2CM(l, lu) * all2CM(w, wu) * all2CM(d, du);
+
+        console.log(all2CM(l, lu), ' * ', all2CM(w, wu), ' * ', all2CM(d, du), ' = ', all2CM(l, lu) * all2CM(w, wu) * all2CM(d, du));
+
+      }
+      var volumCub = Number(volume * q);
+
+      // keep the cm3 value for later use;
+      CM3total.innerHTML = volumCub;
+      //            console.log( 'mainUnit', mainUnit );
+
+      if (mainUnit === 'true') { // is metric
+        aResult.innerHTML = roundNumber(cc2m3(volumCub)); // to cubic meters
+        aResultUnit.innerHTML = '&nbsp;m<sup>3</sup>';
+        bResult.innerHTML = roundNumber(cc2lt(volumCub)); // to liters
+        bResultUnit.innerHTML = '&nbsp;liters';
+      } else { // is imperial
+        aResult.innerHTML = roundNumber(cc2ft3(volumCub)); // to ft3
+        aResultUnit.innerHTML = '&nbsp;ft<sup>3</sup>';
+        bResult.innerHTML = roundNumber(cc2qt(volumCub)); // to quarts
+        bResultUnit.innerHTML = '&nbsp;quarts';
+      }
+
+      calAll(); // call for the calcultation of the total qty's result
+
+    });
+
+    function cc2ft3(cc) {
+      return cc / 28316.8466;
+    }
+
+    function cc2qt(cc) {
+      return cc * 0.00091;
+    }
+
+    function cc2yrd(cc) {
+      return cc / 764554.858;
+    }
+
+    function cc2m3(cc) {
+      return cc / 1000000;
+    }
+
+    function cc2lt(cc) {
+      return cc / 1000;
+    }
+
+    function all2CM(n, unit) {
+      if (unit === 'meters') {
+        return n * 100;
+      } else if (unit === 'inches') {
+        return n * 2.54;
+      } else if (unit === 'feet') {
+        return n * 30.48;
+      } else if (unit === 'yards') {
+        return n * 91.44;
+      } else { // else is centimeters
+        return n;
+      }
+    }
+
+    function roundNumber(number) {
+      return Math.round(number * 100) / 100.00;
+    }
+
+    $(document).click(function(event) {
+      if (event.target.nodeName === 'BUTTON' && event.target.className === 'close') {
+        var el = $('input[id*="-quantity-"]');
+        if (el.attr('id') !== undefined) {
+          $("#" + el.attr('id')).click();
+        } else {
+          document.getElementById('totalResult').innerHTML = '';
+
+          msgBox = document.getElementById('starterMsg'),
+                  totalBox = document.getElementById('TotalMsg');
+          $(msgBox).removeClass('hideMe').addClass('showMe');
+          $(totalBox).removeClass('showMe').addClass('hideMe');
+        }
+      }
+    });
+
+    function calAll() {
+      var cm3Total = 0,
+              d = document.getElementById('totalResult'),
+              ptbags = document.getElementById('proterraBags'),
+              cccbags = document.getElementById('cocoCoirBags'),
+              ccpbags = document.getElementById('cocoPearlBags'),
+              ptS = document.getElementById('ptS'),
+              cccS = document.getElementById('cccS'),
+              ccpS = document.getElementById('ccpS'),
+              ptUnit = 6.8,
+              ccUnit = 50;
+
+      $('span[id*="-cm3-"]').each(function() { // get all data
+        cm3Total = cm3Total + parseFloat(this.innerHTML);
+      });
+
+      // we calculate the number of bags needed
+      var ptN = roundNumber(Math.ceil(cc2ft3(cm3Total) / ptUnit)),
+              ccN = roundNumber(Math.ceil(cc2lt(cm3Total) / ccUnit));
+      if (ptN > 1) {
+        ptS.innerHTML = 's'
+      } else {
+        ptS.innerHTML = '';
+      }
+      if (ccN > 1) {
+        cccS.innerHTML = 's';
+        ccpS.innerHTML = 's';
+      } else {
+        cccS.innerHTML = '';
+        ccpS.innerHTML = '';
+      }
+      ptbags.innerHTML = ptN;
+      cccbags.innerHTML = ccN;
+      ccpbags.innerHTML = ccN;
+
+      // unit changer calculations
+      if (mainUnit === 'true') { // is metric
+        for (var i = 1; i < 3; i++) {
+          if (i === 1) {
+            d.innerHTML = '<span style="display:inline;" id="total-1">' + roundNumber(cc2m3(cm3Total)) + '</span>';
+            d.innerHTML += '<span style="display:inline;" id="totalUnit-1">&nbsp;m<sup>3</sup></span><span class="mb-1"></span>';
+          } else if (i === 2) {
+            d.innerHTML += '<span style="display:inline;" id="total-3">' + roundNumber(cc2lt(cm3Total)) + '</span>';
+            d.innerHTML += '<span style="display:inline;" id="totalUnit-3">&nbsp;liters</span>';
+          }
+        }
+      } else { // is imperial
+        for (var i = 1; i < 4; i++) {
+          if (i === 1) {
+            d.innerHTML = '<span style="display:inline;" id="total-1">' + roundNumber(cc2ft3(cm3Total)) + '</span>';
+            d.innerHTML += '<span style="display:inline;" id="totalUnit-1">&nbsp;ft<sup>3</sup></span><span class="mb-1"></span>';
+          } else if (i === 2) {
+            d.innerHTML += '<span style="display:inline; " id="total-2">' + roundNumber(cc2qt(cm3Total)) + '</span>';
+            d.innerHTML += '<span style="display:inline; " id="totalUnit-2">&nbsp;quarts</span><span class="mb-1"></span>';
+          } else if (i === 3) {
+            d.innerHTML += '<span style="display:inline; " id="total-3">' + roundNumber(cc2yrd(cm3Total)) + '</span>';
+            d.innerHTML += '<span style="display:inline; " id="totalUnit-3">&nbsp;yards<sup>3</sup></span>';
+          }
+        }
+      }
+    }
+
+  });
+</script>
+<style>
+  .top-scroller {
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    font-size: 1em;
+    display: none;
+    z-index: 2;
+    text-align: center;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.35);
+    color: #fff;
+    line-height: 40px;
+
+  }
+  .top-scroller:hover {
+    background: rgba(0,0,0,.6);
+  }
+</style>
+<div class="top-scroller">
+  <img src="assets/img/arrow-137-24.ico">
+</div>
+<script>
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.top-scroller').fadeIn();
+    } else {
+      $('.top-scroller').fadeOut();
+    }
+  });
+  //Click event to scroll to top
+  $('.top-scroller').click(function(){
+    $('html, body').animate({scrollTop : 0},1000);
+    return false;
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Hydrotek Hydroponics Calculators
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- CSS Files -->
+  <link href="./assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  <style>
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      /*opacity: 0.7;*/
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+
+    .top-scroller {
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      font-size: 1em;
+      display: none;
+      z-index: 2;
+      text-align: center;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.35);
+      color: #fff;
+      line-height: 40px;
+
+    }
+    .top-scroller:hover {
+      background: rgba(0,0,0,.6);
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+    <div class="logo text-center">
+      <a style="font-size: 11pt;" class="simple-text logo-normal">
+        Changer la Langue
+      </a>
+      <a href="fr/co2generator.html"><img src="./assets/img/icons8-france-48.png"></a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item active  ">
+          <a class="nav-link text-center" href="./index.html">
+            <p>All Calculators</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./reservoir.html">
+            <img src="assets/img/icons8-water-tower-30.png"><span> Reservoir Volume</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2operating.html">
+            <img src="assets/img/icons8-time-30.png"><span> CO2 Operating Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2generator.html">
+            <img src="assets/img/icons8-co2-gauge-30.png"><span> CO2 Generator Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2injector.html">
+            <img src="assets/img/icons8-scuba-pressure-gauge-30.png"><span> CO2 Injector Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./dehumidifier.html">
+            <img src="assets/img/icons8-dew-point-30.png"><span> Dehumidifier Sizing</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./aircfm.html">
+            <img src="assets/img/icons8-air-quality-30.png"><span> Air Exchange CFM</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./cultureroom.html">
+            <img src="assets/img/icons8-room-30.png"><span> Culture Room Area</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./lightfixtures.html">
+            <img src="assets/img/icons8-idea-30.png"><span> Light Fixtures Coverage</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./watt2btu.html">
+            <img src="assets/img/icons8-lightning-bolt-30.png"><span> Watt to BTU/hr Converter</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./circuitload.html">
+            <img src="assets/img/icons8-integrated-circuit-30.png"><span> Circuit Load Capacity</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./electricitycost.html">
+            <img src="assets/img/icons8-estimate-30.png"><span> Electricity Cost</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./soil.html">
+            <img src="assets/img/icons8-sprout-30.png"><span> Soil Calculator</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./support.html">
+            <img src="assets/img/contact.png"><span> Support / Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center">
+    <img class="img-fluid" style="max-width: 80%; margin-top: 20px;" src="assets/img/hydro-logo.png">
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+
+        <div class="navbar-wrapper">
+          <!--            <a class="navbar-brand" href="#pablo">HH Calculators</a>-->
+
+          <!--            <div class="row text-center">-->
+          <!--              <img class="img-container" src="assets/img/hydro-logo.png">-->
+          <!--            </div>-->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div id="arrowDiv" data-toggle="collapse" href="#collapseInfo" role="button" aria-expanded="false" aria-controls="collapseInfo" class="card-header card-header-warning" onclick="changeArrow()">
+                <div class="ct-chart"></div>
+                <span><strong>CO2 Generator Time Calculator</strong><img id="arrowImg" class="float-right" src="assets/img/arrow-199-24.ico"></span>
+              </div>
+              <div class="card-footer">
+                <div class="collapse" id="collapseInfo">
+                  <p>Calculate the time that your CO2 generator must run to reach the optimal level of carbon dioxide in your culture room. Keep in mind that air naturally contains around 300 ppm of CO2 and that the target for maximizing plant growth is within 1200 ppm to 1500 ppm.</p>
+                  <p>Increase your plant growth rates and flowering by 20-100% by using CO2 from seedling right through harvest. Remember that you must fill your grow room after each air renewal cycle or every 3-hours during "day" time.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="">
+          <form lpformnum="1" class="calcfrm">
+            <div class="row">
+              <div class="col-12">
+
+                <div class="">
+                  <label for="length">Grow room length in feet:</label>
+                  <div class="">
+                    <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" maxlength="3" oninput="calc_validation(this.form)" name="length" id="length" tabindex="1" type="text" value="8" />
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <label for="width">Grow room width in feet:</label>
+                  <div class="">
+                    <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" maxlength="3" oninput="calc_validation(this.form)" name="width" id="width" tabindex="2" type="text" value="8" />
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <label for="height">Grow room height in feet:</label>
+                  <div class="">
+                    <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" maxlength="3" oninput="calc_validation(this.form)" name="height" id="height" tabindex="3" type="text" value="8" />
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <label for="height">BTU/hr of your CO<sub>2</sub> generator&nbsp;<em>(Optional)</em>:</label>
+                  <div class="">
+                    <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" maxlength="6" oninput="calc_validation(this.form)" name="flow_meter_setting" id="flow_meter_setting" tabindex="4" type="text" value="0" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-12 mt-3 mb-3">
+              <div class="text-center">
+                <div class="div1"></div>
+              </div>
+            </div>
+
+            <div class="span5 showresul">
+
+              <div class="form-group">
+                <div class="span7">
+                  <label for="room_area" style="color: #1c1c1c;"><strong>Grow room dimensions in cubic feet (ft<sup>3</sup>) :</strong></label>
+                </div>
+                <div class="span5">
+                  <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="reponses grep form-control" name="room_area" id="room_area" size="6" value="0.0" />
+                </div>
+              </div>
+
+              <div style="text-align: center" class="card card-chart">
+                <div>
+                  <a style="font-size: 13px; color: #1b5e20;"><strong>Air already contains +/- 300 ppm of CO<sub>2</sub></strong></a>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="CO2_to_add_ppm">Quantity of CO<sub>2</sub> to inject to the air in ppm:</label>
+                <div class="span3">
+                  <label for="CO2_to_add_ppm"><strong><span style="font-weight:bold; color: #1b5e20; font-size: 1em;" id="ppmValue">1200</span></strong>&nbsp;<span style="font-weight:bold; color: #1b5e20; font-size: 1em;">PPM</span></label>
+                </div>
+                <div class="span9">
+                  <input class="slider" style="width: 100%;" oninput="managePPM();calc_validation(this.form)" id="CO2_to_add_ppm" name="CO2_to_add_ppm" type="range" max="1600" min="600" step="20" value="1200" />
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <div class="form-group">
+                  <div class="span7">
+                    <label for="cubic_feet_required" style="color: #1c1c1c;">Cubic feet of CO<sub>2</sub> to inject in your grow room:</label>
+                    <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="reponses grep form-control" name="cubic_feet_required" id="cubic_feet_required" size="6" value="0.0" />
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <div class="span7">
+                  <label for="run_time" style="color: #1c1c1c;">Time that your CO<sub>2</sub> generator must run <span style="text-transform: lowercase; font-weight: normal">(minutes&nbsp;/&nbsp;hours)</span>:</label>
+                </div>
+                <div class="span5">
+                  <input style="font-weight:bold; color: #1b5e20; font-size: 1em;" class="reponses grep form-control" name="run_time" id="run_time" size="6" value="0.0" />
+                </div>
+              </div>
+
+              <button class="btn btn-warning col-12 mt-4" onClick="window.location.reload();">Reset</button>
+
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container-fluid">
+  </div>
+</footer>
+
+
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.min.js"></script>
+<script src="./assets/js/core/popper.min.js"></script>
+<script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+<!--<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>-->
+<script src="./assets/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+<script>
+  $(document).ready(function() {
+    $().ready(function() {
+      $sidebar = $('.sidebar');
+
+      $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+      $full_page = $('.full-page');
+
+      $sidebar_responsive = $('body > .navbar-collapse');
+
+      window_width = $(window).width();
+
+      fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+      if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+        if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+          $('.fixed-plugin .dropdown').addClass('open');
+        }
+
+      }
+
+      $('.fixed-plugin a').click(function(event) {
+        // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+        if ($(this).hasClass('switch-trigger')) {
+          if (event.stopPropagation) {
+            event.stopPropagation();
+          } else if (window.event) {
+            window.event.cancelBubble = true;
+          }
+        }
+      });
+
+      $('.fixed-plugin .active-color span').click(function() {
+        $full_page_background = $('.full-page-background');
+
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+
+        var new_color = $(this).data('color');
+
+        if ($sidebar.length != 0) {
+          $sidebar.attr('data-color', new_color);
+        }
+
+        if ($full_page.length != 0) {
+          $full_page.attr('filter-color', new_color);
+        }
+
+        if ($sidebar_responsive.length != 0) {
+          $sidebar_responsive.attr('data-color', new_color);
+        }
+      });
+
+      $('.fixed-plugin .background-color .badge').click(function() {
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+
+        var new_color = $(this).data('background-color');
+
+        if ($sidebar.length != 0) {
+          $sidebar.attr('data-background-color', new_color);
+        }
+      });
+
+      $('.fixed-plugin .img-holder').click(function() {
+        $full_page_background = $('.full-page-background');
+
+        $(this).parent('li').siblings().removeClass('active');
+        $(this).parent('li').addClass('active');
+
+        var new_image = $(this).find("img").attr('src');
+
+        if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+          $sidebar_img_container.fadeOut('fast', function() {
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $sidebar_img_container.fadeIn('fast');
+          });
+        }
+
+        if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+          var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+          $full_page_background.fadeOut('fast', function() {
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+            $full_page_background.fadeIn('fast');
+          });
+        }
+
+        if ($('.switch-sidebar-image input:checked').length == 0) {
+          var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+          var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+          $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+          $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+        }
+
+        if ($sidebar_responsive.length != 0) {
+          $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+        }
+      });
+
+      $('.switch-sidebar-image input').change(function() {
+        $full_page_background = $('.full-page-background');
+
+        $input = $(this);
+
+        if ($input.is(':checked')) {
+          if ($sidebar_img_container.length != 0) {
+            $sidebar_img_container.fadeIn('fast');
+            $sidebar.attr('data-image', '#');
+          }
+
+          if ($full_page_background.length != 0) {
+            $full_page_background.fadeIn('fast');
+            $full_page.attr('data-image', '#');
+          }
+
+          background_image = true;
+        } else {
+          if ($sidebar_img_container.length != 0) {
+            $sidebar.removeAttr('data-image');
+            $sidebar_img_container.fadeOut('fast');
+          }
+
+          if ($full_page_background.length != 0) {
+            $full_page.removeAttr('data-image', '#');
+            $full_page_background.fadeOut('fast');
+          }
+
+          background_image = false;
+        }
+      });
+
+      $('.switch-sidebar-mini input').change(function() {
+        $body = $('body');
+
+        $input = $(this);
+
+        if (md.misc.sidebar_mini_active == true) {
+          $('body').removeClass('sidebar-mini');
+          md.misc.sidebar_mini_active = false;
+
+          $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+        } else {
+
+          $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+          setTimeout(function() {
+            $('body').addClass('sidebar-mini');
+
+            md.misc.sidebar_mini_active = true;
+          }, 300);
+        }
+
+        // we simulate the window Resize so the charts will get updated in realtime.
+        var simulateWindowResize = setInterval(function() {
+          window.dispatchEvent(new Event('resize'));
+        }, 180);
+
+        // we stop the simulation of Window Resize after the animations are completed
+        setTimeout(function() {
+          clearInterval(simulateWindowResize);
+        }, 1000);
+
+      });
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("<input style='width: 100%' name='calcul' type='button' class='btn btn-success' value='Calculate' onclick='calc_validation(this.form)' />").insertAfter(".div1");
+  });
+</script>
+<script type="text/javascript">
+  // form called by submit button
+  function calc_validation(form) {
+
+    this.longeur = form.length;
+    this.largeur = form.width;
+    this.hauteur = form.height;
+    this.co2PPM = form.CO2_to_add_ppm;
+    this.powerBtu = form.flow_meter_setting;
+
+    if (validateForm(this.longeur.id, this.longeur.value, 1, 999) && validateForm(this.largeur.id, this.largeur.value, 1, 999) && validateForm(this.hauteur.id, this.hauteur.value, 1, 999) && mustBeNumber(this.powerBtu.id, this.powerBtu.value)) {
+
+      this.roomArea = Math.round(this.longeur.value * this.largeur.value * this.hauteur.value);
+      this.cubicFeet = Math.fround((this.co2PPM.value / 1000000) * this.roomArea).toFixed(1);
+      this.runTime = Math.fround(((this.co2PPM.value / 1000000) * (this.roomArea / this.powerBtu.value)) * 60 * 566).toFixed(1);
+
+      form.room_area.value = this.roomArea;
+      form.cubic_feet_required.value = this.cubicFeet;
+      form.run_time.value = this.runTime;
+      // if( Number(this.runTime) > 60){
+      //   form.run_time.style.cssText = "background-color: #c00 !important; color: #fff";
+      // }else{
+      //   form.run_time.style.cssText = "background-color: #c6eafb !important";
+      // }
+
+      if (Number(this.runTime) > 60) {
+        form.run_time.style.cssText = "color: #1b5e20 !important; font-weight: bold";
+      } else {
+        form.run_time.style.cssText = "color: #1b5e20; font-weight: bold";
+      }
+
+    } else {
+
+      form.room_area.value = '';
+      form.cubic_feet_required.value = '';
+      form.run_time.value = '';
+    }
+  }
+  /* =======================
+      validating functions
+  ========================== */
+  // this function adds node after an other
+  function insertAfter(el, referenceNode) {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+  }
+  // this function add span message after current element
+  function addElementAfter(elName, elMsg) {
+    if (document.getElementById(elName + 'Msg')) {
+      document.getElementById(elName + 'Msg').remove();
+      document.getElementById(elName).style = "";
+    }
+
+    if (elMsg !== '') {
+      this.newEl = document.createElement('span');
+      this.newEl.innerHTML = elMsg;
+      this.newEl.style = "color: #c00; font-weight: bold;";
+      this.newEl.id = elName + 'Msg';
+      this.ref = document.getElementById(elName);
+      insertAfter(this.newEl, this.ref);
+      // document.getElementById(elName).style = "background-color: #c00; color: #fff;";
+      document.getElementById(elName).focus();
+      document.getElementById(elName).select();
+      return false;
+    }
+  }
+  // this function validates select
+  function validateFormSelect(elName, elValue) {
+    this.el = elValue;
+    this.elMsg = '';
+
+    // validation and alert message
+    if (this.el === '') {
+      this.elMsg = "Please, make a selection.";
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else {
+      // call function to remove message
+      this.elMsg = '';
+      addElementAfter(elName, elMsg);
+      return true;
+    }
+  }
+  // this is the validation function
+  function validateForm(elName, elValue, minValue, maxValue) {
+
+    this.el = elValue;
+    this.elMsg = '';
+
+    // validation and alert message
+    if (this.el === '' || isNaN(this.el)) {
+      if (isNaN(this.el)) {
+        this.elMsg = "Only numbers are accepted.";
+      } else {
+        this.elMsg = "Please, enter a number.";
+      }
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else if (this.el < minValue || this.el > maxValue) {
+      this.elMsg = "This number should be between " + minValue + " and " + maxValue + ".";
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else {
+      // call function to remove message
+      this.elMsg = '';
+      addElementAfter(elName, elMsg);
+      return true;
+    }
+
+  }
+  // this function validate's that it is a number in the field
+  function mustBeNumber(elName, elValue) {
+
+    this.el = elValue;
+    this.elMsg = '';
+
+    // validation and alert message
+    if (isNaN(this.el)) {
+      this.elMsg = "Only numbers are accepted.";
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else {
+      // call function to remove message
+      this.elMsg = '';
+      addElementAfter(elName, elMsg);
+      return true;
+    }
+  }
+
+  function managePPM() {
+    //    var ppm = Number(document.getElementById("CO2_to_add_ppm").value / 1000000),
+    var ppm = Number(document.getElementById("CO2_to_add_ppm").value),
+            ppmValue = document.getElementById("ppmValue");
+
+    ppmValue.innerHTML = ppm;
+  }
+
+  // Changes arrow direction
+
+  function changeArrow() {
+
+    var arrowDiv = $('#arrowDiv');
+    var arrowImg = $('#arrowImg');
+
+    if (arrowDiv.attr('aria-expanded') === 'false') {
+      arrowImg.attr("src", "assets/img/arrow-137-24.ico");
+    } else {
+      arrowImg.attr("src", "assets/img/arrow-199-24.ico");
+    }
+  }
+</script>
+<div class="top-scroller">
+  <img src="assets/img/arrow-137-24.ico">
+</div>
+<script>
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.top-scroller').fadeIn();
+    } else {
+      $('.top-scroller').fadeOut();
+    }
+  });
+  //Click event to scroll to top
+  $('.top-scroller').click(function(){
+    $('html, body').animate({scrollTop : 0},1000);
+    return false;
+  });
+
+</script>
+</body>
+</html>

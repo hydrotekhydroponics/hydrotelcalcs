@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Hydrotek Hydroponics Calculators
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- CSS Files -->
+  <link href="./assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  <style>
+    .top-scroller {
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      font-size: 1em;
+      display: none;
+      z-index: 2;
+      text-align: center;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.35);
+      color: #fff;
+      line-height: 40px;
+
+    }
+    .top-scroller:hover {
+      background: rgba(0,0,0,.6);
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+    <div class="logo text-center">
+      <a style="font-size: 11pt;" class="simple-text logo-normal">
+        Changer la Langue
+      </a>
+      <a href="fr/reservoir.html"><img src="./assets/img/icons8-france-48.png"></a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item active  ">
+          <a class="nav-link text-center" href="./index.html">
+            <p>All Calculators</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./reservoir.html">
+            <img src="assets/img/icons8-water-tower-30.png"><span> Reservoir Volume</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2operating.html">
+            <img src="assets/img/icons8-time-30.png"><span> CO2 Operating Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2generator.html">
+            <img src="assets/img/icons8-co2-gauge-30.png"><span> CO2 Generator Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./co2injector.html">
+            <img src="assets/img/icons8-scuba-pressure-gauge-30.png"><span> CO2 Injector Time</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./dehumidifier.html">
+            <img src="assets/img/icons8-dew-point-30.png"><span> Dehumidifier Sizing</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./aircfm.html">
+            <img src="assets/img/icons8-air-quality-30.png"><span> Air Exchange CFM</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./cultureroom.html">
+            <img src="assets/img/icons8-room-30.png"><span> Culture Room Area</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./lightfixtures.html">
+            <img src="assets/img/icons8-idea-30.png"><span> Light Fixtures Coverage</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./watt2btu.html">
+            <img src="assets/img/icons8-lightning-bolt-30.png"><span> Watt to BTU/hr Converter</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./circuitload.html">
+            <img src="assets/img/icons8-integrated-circuit-30.png"><span> Circuit Load Capacity</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./electricitycost.html">
+            <img src="assets/img/icons8-estimate-30.png"><span> Electricity Cost</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./soil.html">
+            <img src="assets/img/icons8-sprout-30.png"><span> Soil Calculator</span>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="./support.html">
+            <img src="assets/img/contact.png"><span> Support / Feedback</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center">
+    <img class="img-fluid" style="max-width: 80%; margin-top: 20px;" src="assets/img/hydro-logo.png">
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+
+        <div class="navbar-wrapper">
+          <!--            <a class="navbar-brand" href="#pablo">HH Calculators</a>-->
+
+          <!--            <div class="row text-center">-->
+          <!--              <img class="img-container" src="assets/img/hydro-logo.png">-->
+          <!--            </div>-->
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="card card-chart">
+              <div id="arrowDiv" data-toggle="collapse" href="#collapseInfo" role="button" aria-expanded="false" aria-controls="collapseInfo" class="card-header card-header-warning" onclick="changeArrow()">
+                <div class="ct-chart"></div>
+                <span><strong>Reservoir Volume Calculator</strong><img id="arrowImg" class="float-right" src="assets/img/arrow-199-24.ico"></span>
+              </div>
+              <div class="card-footer">
+                <div class="collapse" id="collapseInfo">
+                  <p>Find the total liters or US gallons your reservoir can hold by simply entering the length, width, and depth. This data is essential for determining the correct ratio of nutrients, the total liquid that will be consumed by your plants or the maximum number of drip irrigation feeders, etc.</p>
+                  <p>Define the minimum tank size needed by the quantity and species of plants you will be growing. As a general rule of thumb when growing hydroponically, small plants require at least ½ gallon per plant, medium plants 1 ½ gallon and large plants 2 ½ gallons.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form lpformnum="1" class="calcfrm">
+
+          <div class="row">
+            <div class="col-sm-12 col-md-12 mt-3">
+              <div>
+                <label for="longeur"><strong>Reservoir length in inches:</strong></label>
+                <input class="form-control" style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" maxlength="3" name="longeur" id="longeur" size="2" type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 mt-3">
+              <div>
+                <label for="largeur"><strong>Reservoir width in inches:</strong></label>
+                <input class="form-control" style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" maxlength="3" name="largeur" id="largeur" size="2" type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 mt-3">
+              <div>
+                <label for="hauteur"><strong>Reservoir depth in inches:</strong></label>
+                <input class="form-control" style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" maxlength="3" name="hauteur" id="hauteur" size="2" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="mt-4 text-center" >
+              <div class="div1"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mt-4 mb-2">
+              <span><h4 style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20;">Maximum quantity that your reservoir can contain:</h4></span>
+            </div>
+            <div class="col-12 col-md-12">
+              <div>
+                <label for="litre"><strong>In litres:</strong></label>
+              </div>
+            </div>
+            <div class="col-12 col-md-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" name="litre" id="litre" size="6" value="" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-12 col-md-12">
+              <div>
+                <label for="gallon"><strong>In US gallons:</strong></label>
+              </div>
+            </div>
+            <div class="col-12 col-md-12">
+              <div class="input-group">
+                <input style="background-color: #EEEEEE; border: none; font-weight:bold; color: #1b5e20; font-size: 1em;" class="form-control" name="gallon" id="gallon" size="6" value="" readonly >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="mt-4 text-center" >
+              <button style="width: 100%;" class="btn btn-warning col-12 mt-4" onClick="window.location.reload();">Reset</button>
+            </div>
+          </div>
+        </form>
+            </div>
+      </div>
+        </div>
+        <footer class="footer">
+          <div class="container-fluid">
+          </div>
+        </footer>
+      </div>
+<!--   Core JS Files   -->
+<script src="./assets/js/core/jquery.min.js"></script>
+<script src="./assets/js/core/popper.min.js"></script>
+<script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+<!--<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>-->
+<script src="./assets/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
+<script>
+  // Changes arrow direction
+
+  function changeArrow() {
+
+    var arrowDiv = $('#arrowDiv');
+    var arrowImg = $('#arrowImg');
+
+    if (arrowDiv.attr('aria-expanded') === 'false') {
+      arrowImg.attr("src","assets/img/arrow-137-24.ico");
+    } else {
+      arrowImg.attr("src","assets/img/arrow-199-24.ico");
+    }
+  }
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $( "<input class='btn btn-success' name='calcul' type='button' value='Calculate' style='width: 100%;'  onclick='calc_validation(this.form)' />" ).insertAfter( ".div1" );
+  });
+</script>
+<script type="text/javascript">
+
+  // form called by submit button
+  function calc_validation(form){
+
+    this.longeur = form.longeur;
+    this.largeur = form.largeur;
+    this.hauteur = form.hauteur;
+
+    this.volume = this.longeur.value * this.largeur.value * this.hauteur.value;
+    this.gallon = this.volume / 231; // in US gallons
+    this.litre = this.gallon * 3.78; // then we convert in liters
+
+
+    if( validateForm(this.longeur.id, this.longeur.value, 1, 999)
+            && validateForm(this.largeur.id, this.largeur.value, 1, 999)
+            && validateForm(this.hauteur.id, this.hauteur.value, 1, 999) ){
+
+      form.litre.value = this.litre.toFixed(0);
+      form.gallon.value =	this.gallon.toFixed(0);
+
+    }else{
+
+      form.litre.value = '';
+      form.gallon.value =	'';
+    }
+  }
+
+
+  /* =======================
+      validating functions
+  ========================== */
+
+  // this function adds node after an other
+  function insertAfter(el, referenceNode) {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+  }
+  // this function add span message after current element
+  function addElementAfter(elName, elMsg) {
+    if (document.getElementById(elName + 'Msg')) {
+      document.getElementById(elName + 'Msg').remove();
+      document.getElementById(elName).style = "";
+    }
+
+    if (elMsg !== '') {
+      this.newEl = document.createElement('span');
+      this.newEl.innerHTML = elMsg;
+      this.newEl.style = "color: #c00; font-weight: bold;";
+      this.newEl.id = elName + 'Msg';
+      this.ref = document.getElementById(elName);
+      insertAfter(this.newEl, this.ref);
+      // document.getElementById(elName).style = "background-color: #c00; color: #fff;";
+      document.getElementById(elName).focus();
+      document.getElementById(elName).select();
+      return false;
+    }
+  }
+  // this function validates select
+  function validateFormSelect(elName, elValue) {
+    this.el = elValue;
+    this.elMsg = '';
+
+    // validation and alert message
+    if (this.el === '') {
+      this.elMsg = "Please, make a selection.";
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else {
+      // call function to remove message
+      this.elMsg = '';
+      addElementAfter(elName, elMsg);
+      return true;
+    }
+  }
+  // this is the validation function
+  function validateForm(elName, elValue, minValue, maxValue) {
+
+    this.el = elValue;
+    this.elMsg = '';
+
+    // validation and alert message
+    if (this.el === '' || isNaN(this.el)) {
+      if (isNaN(this.el)) {
+        this.elMsg = "Only numbers are accepted.";
+      } else {
+        this.elMsg = "Please, enter a number.";
+      }
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else if (this.el < minValue || this.el > maxValue) {
+      this.elMsg = "This number should be between " + minValue + " and " + maxValue + ".";
+      // call function to add message
+      addElementAfter(elName, elMsg);
+    } else {
+      // call function to remove message
+      this.elMsg = '';
+      addElementAfter(elName, elMsg);
+      return true;
+    }
+
+  }
+
+</script>
+<div class="top-scroller">
+  <img src="assets/img/arrow-137-24.ico">
+</div>
+<script>
+  $(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+      $('.top-scroller').fadeIn();
+    } else {
+      $('.top-scroller').fadeOut();
+    }
+  });
+  //Click event to scroll to top
+  $('.top-scroller').click(function(){
+    $('html, body').animate({scrollTop : 0},1000);
+    return false;
+  });
+
+</script>
+</body>
+</html>
